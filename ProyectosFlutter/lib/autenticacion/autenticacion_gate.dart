@@ -16,7 +16,7 @@ class AutenticacionGate extends StatelessWidget {
 
           //usuario se inicio sesion
           if (snapshot.hasData) {
-            return const InicioPage();
+            return InicioPage();
           }
 
           //usuario no inicio sesion

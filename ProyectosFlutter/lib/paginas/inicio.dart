@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:proyectosflutter/autenticacion/autenticacion_service.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:proyectosflutter/componentes/drawer_ref.dart';
+
+import '../componentes/item_ref.dart';
+import '../modelos/carrito_modelo.dart';
 
 class InicioPage extends StatelessWidget {
-  const InicioPage({super.key});
+  InicioPage({super.key});
 
-  void irCarrito() {
+  My_Drawer drawer = My_Drawer();
 
-  }
-
-  void logout() {
-    //Instancia de AuthService
-    final _authServicio = AutenticacionService();
-    _authServicio.cerrarSesion();
+  void irCarrito(BuildContext context) {
+    Navigator.pushNamed(context, "/carrito");
   }
 
   @override
@@ -20,125 +21,90 @@ class InicioPage extends StatelessWidget {
       backgroundColor: Colors.yellow.shade50,
       appBar: AppBar(
         title: const Text(
-            "I N I C I O",
+          "I N I C I O",
           style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-            color: Colors.deepOrangeAccent
-          ),
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+              color: Colors.deepOrangeAccent),
         ),
         actions: [
           //boton carrito
-          IconButton(onPressed: irCarrito, icon: const Icon(Icons.shopping_basket_outlined, color: Colors.deepOrangeAccent,)),
+          IconButton(
+              onPressed: () {
+                irCarrito(context);
+              },
+              icon: const Icon(
+                Icons.shopping_basket_outlined,
+                color: Colors.deepOrangeAccent,
+              )),
         ],
         backgroundColor: Colors.amberAccent.shade100,
       ),
-      drawer: Drawer(
-        backgroundColor: Colors.yellow.shade100,
+      drawer: drawer.build(context),
+      body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              children: [
-                //logo app
-                DrawerHeader(
-                    child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.shopping_cart_sharp,
-                              color: Colors.redAccent.shade200,
-                              size: 60,
-                            ),
-                            const SizedBox(height: 10,),
-                            Text(
-                              "G R O C E R E A S E",
-                              style: TextStyle(
-                                  color: Colors.redAccent.shade200,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18
-                              ),
-                            ),
-                          ],
-                        )
-                    )
-                ),
-
-                //celda irInicio
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                  child: ListTile(
-                    title: const Text(
-                      "I N I C I O",
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.deepOrangeAccent,
-                          fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    leading: const Icon(Icons.home, color: Colors.deepOrangeAccent,),
-                    onTap: () {
-                      Navigator.pushNamed(context, "/inicio");
-                    },
-                  ),
-                ),
-
-                //celda irProductos
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                  child: ListTile(
-                    title: const Text(
-                      "P R O D U C T O S",
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.deepOrangeAccent,
-                          fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    leading: const Icon(Icons.fastfood, color: Colors.deepOrangeAccent,),
-                    onTap: () {
-                      Navigator.pushNamed(context, "/productos");
-                    },
-                  ),
-                ),
-
-                //celda irInicio
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                  child: ListTile(
-                    title: const Text(
-                      "C O N T A C T O",
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.deepOrangeAccent,
-                          fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    leading: const Icon(Icons.email, color: Colors.deepOrangeAccent,),
-                    onTap: () {
-                      Navigator.pushNamed(context, "/contacto");
-                    },
-                  ),
-                ),
-              ],
+            const SizedBox(
+              height: 20,
             ),
-            //celda logout
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-              child: ListTile(
-                title: const Text(
-                  "C E R R A R  S E S I Ó N",
-                  style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.deepOrangeAccent,
-                      fontWeight: FontWeight.bold
-                  ),
+
+            //Mensaje bienvenida
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 12.0, vertical: 12.0),
+                child: Text(
+                  "Buenas, ¿Qué desea comprar hoy?",
+                  style: GoogleFonts.cairo(
+                      fontSize: 22, color: Colors.deepOrangeAccent),
                 ),
-                leading: const Icon(Icons.login_outlined, color: Colors.deepOrangeAccent,),
-                onTap: logout,
               ),
             ),
+
+            //divisor
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Divider(),
+            ),
+
+            //Mensaje bienvenida
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 12.0, vertical: 12.0),
+                child: Text(
+                  "APROVECHA AHORA --- PRODUCTOS EN OFERTA:",
+                  style: GoogleFonts.cairo(
+                      fontSize: 16, color: Colors.deepOrangeAccent),
+                ),
+              ),
+            ),
+
+            //grid de productos
+            Expanded(child: Consumer<Carrito>(
+              builder: (context, value, child) {
+                return GridView.builder(
+                  itemCount: value.productosTienda.length - 12,
+                  padding: const EdgeInsets.all(12.0),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 1 / 1.3,
+                  ),
+                  itemBuilder: (context, index) {
+                    return ItemTiendaTile(
+                      nombre: value.productosTienda[index][0],
+                      precio: value.productosTienda[index][1],
+                      cantidad: value.productosTienda[index][2],
+                      rutaImg: value.productosTienda[index][3],
+                      color: value.productosTienda[index][4],
+                      onPressed: () {
+                        Provider.of<Carrito>(context, listen: false).aniadirCarrito(index);
+                      },
+                    );
+                  },
+                );
+              },
+            )),
           ],
         ),
       ),
