@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "252316973650",
+    "project_id": "grocerease-56442",
+    "storage_bucket": "grocerease-56442.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252316973650:android:48b336002a13dc4d04bd8b",
+        "android_client_info": {
+          "package_name": "com.example.proyectosflutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYzZBi2UTXGQobRgPFTETInIWCSlFbVtI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
