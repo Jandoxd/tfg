@@ -131,6 +131,7 @@ class Carrito extends ChangeNotifier {
     ],
   ];
 
+
   //lista de productos de carrito
   List _productosCarrito = [];
 
@@ -154,7 +155,7 @@ class Carrito extends ChangeNotifier {
   String precioTotal() {
     double precioFinal = 0;
     for (int i=0; i<productosCarrito.length; i++){
-      precioFinal += double.parse(_productosCarrito[i][i]);
+      precioFinal += double.parse(_productosCarrito[i][1]);
     }
     return precioFinal.toStringAsFixed(2);
   }

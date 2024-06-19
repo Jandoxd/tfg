@@ -54,6 +54,40 @@ class CarritoPage extends StatelessWidget {
                   },
                 ),
               ),
+
+              //Precio
+              Padding(
+                padding: const EdgeInsets.all(36.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.deepOrangeAccent.shade400,
+                    borderRadius: BorderRadius.circular(12)
+                  ),
+                  padding: const EdgeInsets.all(24),
+                  child: Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "PRECIO TOTAL: ",
+                            style: TextStyle(
+                              color: Colors.white),
+                          ),
+                          Text(
+                            "${value.precioTotal()}€",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           );
         },

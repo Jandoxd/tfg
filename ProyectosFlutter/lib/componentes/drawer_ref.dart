@@ -85,7 +85,7 @@ class My_Drawer {
                 ),
               ),
 
-              //celda irInicio
+              //celda irContactos
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
