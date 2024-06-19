@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:proyectosflutter/autenticacion/autenticacion_gate.dart';
 import 'package:proyectosflutter/firebase_options.dart';
 import 'package:proyectosflutter/modelos/carrito_modelo.dart';
+import 'package:proyectosflutter/paginas/carrito.dart';
 import 'package:proyectosflutter/paginas/contacto.dart';
 import 'package:proyectosflutter/paginas/inicio.dart';
 import 'package:proyectosflutter/paginas/productos.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
           "/inicio": (context) => InicioPage(),
           "/productos": (context) => ProductosPage(),
           "/contacto": (context) => const ContactoPage(),
+          "/carrito": (context) => CarritoPage()
         },
       ),
     );

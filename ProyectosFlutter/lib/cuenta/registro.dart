@@ -20,7 +20,7 @@ class RegisterPage extends StatelessWidget {
     final _auth = AutenticacionService();
 
     //Si coinciden contraseñas se crea cuenta
-    if (_pwController.text == _pwVController){
+    if (_pwController.text == _pwVController.text){
       try{
         _auth.registrarConEmailContrasenia(
             _emailController.text,
